@@ -12,10 +12,17 @@ export default [
     }
   },
   {
-    _tag:'CSidebarNavItem',
-    name:'Kriteria',
-    to:'/kriteria',
-    icon: 'cil-pencil',
-  },
+    _tag: 'CSidebarNavDropdown',
+    name: 'Kriteria',
+    route: '/kriteria',
+    icon: 'cil-puzzle',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Sub Kriteria',
+        to: '/kriteria/subkriteria',
+      }
+    ]
+  }
 ]
 
