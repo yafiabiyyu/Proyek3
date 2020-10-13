@@ -15,6 +15,10 @@ import {
 } from '@coreui/react'
 // import CIcon from '@coreui/icons-react'
 import kriteriaData from '../dumy/SubkriteriaData'
+import kriteriaTangungOrangtua from '../dumy/kriteriaTangungOrangtua'
+import statusorangtua from '../dumy/statusorangtua'
+import semester from '../dumy/semester'
+import ipk from '../dumy/ipk'
 const fields = [
   {key:'no',_style: { width: '20%'}},
   {key:'Nama Sub Kriteria'},
@@ -81,10 +85,80 @@ const Subkriteria = () => {
                   />
                 </CTabPane>
                 <CTabPane>
-                  {`2. test`}
+                  <CDataTable
+                      items={kriteriaTangungOrangtua}
+                      fields={fields}
+                      itemsPerPage={4}
+                      pagination
+                      scopedSlots = {{
+                        'status':
+                          (item)=>(
+                            <td>
+                              <div className="row mx-md-n2">
+                                <CButton className="m-2" color="success">Edit</CButton>
+                                <CButton className="m-2" color="danger">Delete</CButton>
+                              </div>
+                            </td>
+                          )
+                      }}
+                    />
                 </CTabPane>
                 <CTabPane>
-                  {`3. test`}
+                  <CDataTable
+                      items={statusorangtua}
+                      fields={fields}
+                      itemsPerPage={4}
+                      pagination
+                      scopedSlots = {{
+                        'status':
+                          (item)=>(
+                            <td>
+                              <div className="row mx-md-n2">
+                                <CButton className="m-2" color="success">Edit</CButton>
+                                <CButton className="m-2" color="danger">Delete</CButton>
+                              </div>
+                            </td>
+                          )
+                      }}
+                    />
+                </CTabPane>
+                <CTabPane>
+                  <CDataTable
+                    items={semester}
+                    fields={fields}
+                    itemsPerPage={4}
+                    pagination
+                    scopedSlots = {{
+                      'status':
+                        (item)=>(
+                          <td>
+                            <div className="row mx-md-n2">
+                              <CButton className="m-2" color="success">Edit</CButton>
+                              <CButton className="m-2" color="danger">Delete</CButton>
+                            </div>
+                          </td>
+                        )
+                    }}
+                  />
+                </CTabPane>
+                <CTabPane>
+                  <CDataTable
+                    items={ipk}
+                    fields={fields}
+                    itemsPerPage={4}
+                    pagination
+                    scopedSlots = {{
+                      'status':
+                        (item)=>(
+                          <td>
+                            <div className="row mx-md-n2">
+                              <CButton className="m-2" color="success">Edit</CButton>
+                              <CButton className="m-2" color="danger">Delete</CButton>
+                            </div>
+                          </td>
+                        )
+                    }}
+                  />
                 </CTabPane>
               </CTabContent>
             </CTabs>

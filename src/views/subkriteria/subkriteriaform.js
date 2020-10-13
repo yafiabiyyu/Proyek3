@@ -10,7 +10,8 @@ import {
   CFormGroup,
   CFormText,
   CInput,
-  CLabel
+  CLabel,
+  CSelect
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
@@ -24,19 +25,24 @@ const KriteriaForm = () => {
       <CCardBody>
         <CForm action="" method="post">
           <CFormGroup>
-            <CLabel htmlFor="nf-nama">Kriteria</CLabel>
-            <CInput type="text" id="nf-nama" name="nf-text" placeholder="Masukan nama kriteria"/>
-            <CFormText className="help-block">Masukan nama kriteria</CFormText>
+            <CLabel htmlFor="select">Kriteria</CLabel>
+            <CSelect custom name ="kriteria" id="kriteria">
+                <option value="">Please Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </CSelect>
           </CFormGroup>
           <CFormGroup>
             <CLabel htmlFor="nf-atribut">Nama Sub Kriteria</CLabel>
-            <CInput type="text" id="nf-atribut" name="nf-atribut" placeholder="Masukan jenis atribut"/>
-            <CFormText className="help-block">Masukan jenis atribut</CFormText>
+            <CInput type="text" id="nf-atribut" name="nf-atribut" placeholder="Nama Sub Kriteria"/>
+            <CFormText className="help-block">Masukan Nama Sub Kriteria</CFormText>
           </CFormGroup>
           <CFormGroup>
             <CLabel htmlFor="nf-bobot">Nilai</CLabel>
-            <CInput type="text" id="nf-bobot" name="nf-bobot" placeholder="Masukan jenis bobot"/>
-            <CFormText className="help-block">Masukan jenis bobot</CFormText>
+            <CInput type="text" id="nf-bobot" name="nf-bobot" placeholder="Nilai Sub Kriteria"/>
+            <CFormText className="help-block">Masukan Nilai</CFormText>
           </CFormGroup>
         </CForm>
       </CCardBody>

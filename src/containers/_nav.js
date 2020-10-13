@@ -14,14 +14,19 @@ export default [
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Kriteria',
-    route: '/kriteria',
     icon: 'cil-puzzle',
     _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Data Kriteria',
+        to: '/kriteria',
+      },
       {
         _tag: 'CSidebarNavItem',
         name: 'Sub Kriteria',
         to: '/kriteria/subkriteria',
       }
+
     ]
   }
 ]
