@@ -2,7 +2,7 @@ import axios from "axios";
 
 require("dotenv").config();
 
-const API_URL = 'http://48dad58ee83d.ngrok.io/api/v1';
+const API_URL = 'https://48dad58ee83d.ngrok.io/api/v1';
 
 class AuthService{
 
