@@ -1,12 +1,14 @@
 import React from 'react';
 
+
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const Kriteria = React.lazy(() => import('./views/kriteria/kriteria'));
 const KriteriaForm = React.lazy(() => import('./views/kriteria/kriteriaform'));
 const SubKriteria = React.lazy(() => import('./views/subkriteria/subkriteria'));
-const SubKriteriaForm = React.lazy(() => import('./views/subkriteria/subkriteriaform'))
+const SubKriteriaForm = React.lazy(() => import('./views/subkriteria/subkriteriaform'));
+const TheLayout = React.lazy(() => import('./containers/TheLayout'));
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/', exact: true, name: 'Home', component: TheLayout },
   { path: '/dashboard',name: 'Dashboard', component: Dashboard },
   { path: '/kriteria',exact: 'true', name:'Kriteria', component: Kriteria},
   { path: '/kriteria/add', name:'Tambah Kriteria', component: KriteriaForm},
