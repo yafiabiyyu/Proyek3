@@ -8,7 +8,7 @@ import { CContainer, CFade } from '@coreui/react'
 
 // routes config
 import routes from '../routes'
-  
+
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -21,21 +21,27 @@ const TheContent = () => {
       <CContainer fluid>
         <Suspense fallback={loading}>
           <Switch>
-            {routes.map((route, idx) => {
-              return route.component && (
-                <Route
-                  key={idx}
-                  path={route.path}
-                  exact={route.exact}
-                  name={route.name}
-                  render={props => (
+          {routes.map((route, idx) => {
+            return route.component ? (
+              <Route
+                key={idx}
+                path={route.path}
+                exact={route.exact}
+                name={route.name}
+                render={props =>
+                  localStorage.getItem("user") !== null
+                ? (
                     <CFade>
                       <route.component {...props} />
                     </CFade>
-                  )} />
-              )
-            })}
-            <Redirect from="/" to="/dashboard" />
+                  ) : (
+                    <Redirect to={{ pathname: "/login" }} />
+                  )
+                }
+              />
+            ) : null;
+          })}
+          <Redirect from="/" to="/dashboard" />
           </Switch>
         </Suspense>
       </CContainer>

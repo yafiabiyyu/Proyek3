@@ -38,7 +38,7 @@ export default class Login extends React.Component {
     this.setState({
       password:e.target.value
     });
-    console.log(e.target.value);
+    // console.log(e.target.value);
   }
 
   handleLogin(e){
@@ -46,7 +46,6 @@ export default class Login extends React.Component {
     this.setState({
       message:""
     });
-    console.log(this.state.password);
     AuthService.login(this.state.username, this.state.password).then(
       () => {
         this.props.history.push("/");
