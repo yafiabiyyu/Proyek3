@@ -29,7 +29,7 @@ const TheContent = () => {
                 exact={route.exact}
                 name={route.name}
                 render={props =>
-                  localStorage.getItem("user") !== null
+                  localStorage.getItem("user") === null
                 ? (
                     <CFade>
                       <route.component {...props} />
