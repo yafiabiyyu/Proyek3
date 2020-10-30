@@ -7,12 +7,12 @@ const API_URL = process.env.REACT_APP_BASE_URL_API;
 
 class KriteriaService {
   getKriteriaContent() {
-    return axios.get(API_URL + '/proyek/data/kriteria', {headers:authHeader()});
+    return axios.get(API_URL + `/proyek/data/kriteria`, {headers:authHeader()});
   }
 
   postKriteriaData(nama, atribut, bobot) {
     return axios
-    .post(API_URL + '/proyek/data/kriteria',{
+    .post(API_URL + `/proyek/data/kriteria`,{
       nama,
       atribut,
       bobot
@@ -40,6 +40,10 @@ class KriteriaService {
       console.log(response);
       return response
     })
+  }
+
+  getSubkriteria(kode) {
+    return axios.get(API_URL + `/proyek/data/subkriteria/${kode}`,{headers:authHeader()});
   }
 }
 export default new KriteriaService();

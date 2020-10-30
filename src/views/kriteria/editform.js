@@ -75,7 +75,7 @@ export default class EditForm extends React.Component {
       this.state.atribut,
       this.state.bobot
     ).then(
-      (response) => {
+      () => {
         this.props.history.push('/kriteria')
         window.location.reload();
       },

@@ -1,169 +1,118 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {
-  CNav,
-  CNavItem,
-  CNavLink,
-  CTabContent,
-  CTabPane,
+  CSelect,
   CCard,
-  CCardBody,
-  CDataTable,
   CButton,
-  CTabs,
-  CCardHeader
+  CLabel,
+  CCardBody,
+  CCardHeader,
+  CCol,
+  CDataTable,
+  CRow
 } from '@coreui/react'
 // import CIcon from '@coreui/icons-react'
-import kriteriaData from '../dumy/SubkriteriaData'
-import kriteriaTangungOrangtua from '../dumy/kriteriaTangungOrangtua'
-import statusorangtua from '../dumy/statusorangtua'
-import semester from '../dumy/semester'
-import ipk from '../dumy/ipk'
-const fields = [
-  {key:'no',_style: { width: '20%'}},
-  {key:'Nama Sub Kriteria'},
-  {key:'Nilai',_style: { width: '20%'}},
-  {key:'status'}
-]
+import KriteriaService from '../../service/kriteria.service';
 
-const Subkriteria = () => {
-  return(
-    <CCard>
-          <CCardHeader>
-            Sub Kriteria
-          </CCardHeader>
-            <Link to='/kriteria/subkriteria/add'>
-              <CButton color="info" className="float-right mt-3 mr-5">Tambah Data</CButton>
-            </Link>
-          <CCardBody>
-            <CTabs>
-              <CNav variant="tabs">
-                <CNavItem>
-                  <CNavLink>
-                    Pendapatan Orang Tua
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink>
-                    Tanggungan Orang Tua
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink>
-                    Status Orang Tua
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink>
-                    Semester
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink>
-                    IPK
-                  </CNavLink>
-                </CNavItem>
-              </CNav>
-              <CTabContent>
-                <CTabPane>
-                  <CDataTable
-                    items={kriteriaData}
-                    fields={fields}
-                    itemsPerPage={4}
-                    pagination
-                    scopedSlots = {{
-                      'status':
-                        (item)=>(
-                          <td>
-                            <div className="row mx-md-n2">
-                              <CButton className="m-2" color="success">Edit</CButton>
-                              <CButton className="m-2" color="danger">Delete</CButton>
-                            </div>
-                          </td>
-                        )
-                    }}
-                  />
-                </CTabPane>
-                <CTabPane>
-                  <CDataTable
-                      items={kriteriaTangungOrangtua}
-                      fields={fields}
-                      itemsPerPage={4}
-                      pagination
-                      scopedSlots = {{
-                        'status':
-                          (item)=>(
-                            <td>
-                              <div className="row mx-md-n2">
-                                <CButton className="m-2" color="success">Edit</CButton>
-                                <CButton className="m-2" color="danger">Delete</CButton>
-                              </div>
-                            </td>
-                          )
-                      }}
-                    />
-                </CTabPane>
-                <CTabPane>
-                  <CDataTable
-                      items={statusorangtua}
-                      fields={fields}
-                      itemsPerPage={4}
-                      pagination
-                      scopedSlots = {{
-                        'status':
-                          (item)=>(
-                            <td>
-                              <div className="row mx-md-n2">
-                                <CButton className="m-2" color="success">Edit</CButton>
-                                <CButton className="m-2" color="danger">Delete</CButton>
-                              </div>
-                            </td>
-                          )
-                      }}
-                    />
-                </CTabPane>
-                <CTabPane>
-                  <CDataTable
-                    items={semester}
-                    fields={fields}
-                    itemsPerPage={4}
-                    pagination
-                    scopedSlots = {{
-                      'status':
-                        (item)=>(
-                          <td>
-                            <div className="row mx-md-n2">
-                              <CButton className="m-2" color="success">Edit</CButton>
-                              <CButton className="m-2" color="danger">Delete</CButton>
-                            </div>
-                          </td>
-                        )
-                    }}
-                  />
-                </CTabPane>
-                <CTabPane>
-                  <CDataTable
-                    items={ipk}
-                    fields={fields}
-                    itemsPerPage={4}
-                    pagination
-                    scopedSlots = {{
-                      'status':
-                        (item)=>(
-                          <td>
-                            <div className="row mx-md-n2">
-                              <CButton className="m-2" color="success">Edit</CButton>
-                              <CButton className="m-2" color="danger">Delete</CButton>
-                            </div>
-                          </td>
-                        )
-                    }}
-                  />
-                </CTabPane>
-              </CTabContent>
-            </CTabs>
-          </CCardBody>
-        </CCard>
-  )
+export default class SubKriteria extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.state = {
+      content:[],
+      contentSub:[],
+      kode_kriteria:"",
+      fields:[
+        {key:'kode_subkriteria',label:'ID',_style: { width: '20%'}},
+        {key:'nama',label:'Nama Subkriteria'},
+        {key:'nilai',label:'Nilai',_style: { width: '20%'}},
+        {key:'status'}
+      ]
+    }
+  }
+  componentDidMount() {
+    KriteriaService.getKriteriaContent().then(
+      response => {
+        this.setState({
+          content:response.data.data
+        });
+        console.log(response.data.data);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  handleSelect(e) {
+    KriteriaService.getSubkriteria(e.target.value).then(
+      response => {
+        this.setState({
+          contentSub:response.data
+        })
+        console.log(response.data);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+    // this.setState({
+    //   kode_kriteria:e.target.value
+    // });
+    // console.log(e.target.value);
+  }
+
+  render() {
+    return(
+      <div className="animated fadeIn">
+        <CRow className="d-flex justify-content-between">
+          <CCol>
+            <CCard>
+              <CCardHeader>
+                Data Kriteria
+              </CCardHeader>
+              <CCardBody>
+              <Link to='/kriteria/subkriteria/add'>
+                <CButton color="info" className="float-right m-2">Tambah Data</CButton>
+              </Link>
+              <div className="container">
+                <div className="row justify-content-md-center">
+                  <div className="col-md-6">
+                    <CLabel htmlFor="select" className="mr-4">Kriteria</CLabel>
+                    <CSelect custom name ="kriteria" onChange={this.handleSelect} id="kriteria" className="w-75">
+                        <option value="">Please Select</option>
+                        {this.state.content.map(data => (
+                          <option key={data.kode} value={data.kode}>{data.nama}</option>
+                        ))}
+                      </CSelect>
+                  </div>
+                </div>
+              </div>
+              <CDataTable
+                items={this.state.contentSub}
+                fields={this.state.fields}
+                itemsPerPage={4}
+                pagination
+                scopedSlots = {{
+                  'status':
+                    (item)=>(
+                      <td>
+                        <div className="row mx-md-n5">
+                          <Link to={{pathname:"/kriteria/edit",
+                        data:item.kode}}>
+                            <CButton className="m-2" color="success">Edit</CButton>
+                          </Link>
+                          <CButton className="m-2" color="danger">Delete</CButton>
+                        </div>
+                      </td>
+                    )
+                }}
+              />
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+      </div>
+    )
+  }
 }
-export default Subkriteria
