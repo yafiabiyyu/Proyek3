@@ -45,7 +45,7 @@ export default class HasilSaw extends React.Component {
           <CCol>
             <CCard>
               <CCardHeader>
-                Data Hasil SAW
+                Data Bobot
               </CCardHeader>
               <CCardBody>
               {/* <Link to='/kriteria/add'>

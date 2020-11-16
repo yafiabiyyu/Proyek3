@@ -18,8 +18,8 @@ export default class Kriteria extends React.Component {
     this.state = {
       content:[],
       fields: [
-        {key:'kode',label:'ID',_style: { width: '20%'}},
-        {key:'nama',label:'Nama Kriteria'},
+        {key:'_id',label:'ID',_style: { width: '20%'}},
+        {key:'nama_kriteria',label:'Nama Kriteria'},
         {key:'atribut',label:'Atribut',_style: { width: '20%'}},
         {key:'bobot',label:'Bobot'},
         {key:'status'}
@@ -63,7 +63,7 @@ export default class Kriteria extends React.Component {
                       <td>
                         <div className="row mx-md-n5">
                           <Link to={{pathname:"/kriteria/edit",
-                        data:item.kode}}>
+                        data:item._id}}>
                             <CButton className="m-2" color="success">Edit</CButton>
                           </Link>
                           <CButton className="m-2" color="danger">Delete</CButton>

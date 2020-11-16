@@ -11,35 +11,35 @@ import {
 } from '@coreui/react'
 
 // import KriteriaService from '../../service/kriteria.service';
-import alternatifData from '../dumy/alternatifData';
+import AlternatifService from '../../service/alternatif.service';
 
-export default class HasilSaw extends React.Component {
+export default class Alternatif extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // content:[],
+      content:[],
       fields: [
-        {key:'kode',label:'ID',_style: { width: '20%'}},
-        {key:'nama',label:'Nama Mahasiswa'},
+        {key:'_id',label:'ID',_style: { width: '20%'}},
+        {key:'nama_mahasiswa',label:'Nama Mahasiswa'},
         {key:'alamat',label:'Nilai',_style: { width: '20%'}},
-        {key:'kelamin',label:'Rank'},
+        {key:'jenis_kelamin',label:'Rank'},
         {key:'status'}
       ]
     }
   }
-  // componentDidMount() {
-  //   KriteriaService.getKriteriaContent().then(
-  //     response => {
-  //       this.setState({
-  //         content:response.data.data
-  //       });
-  //       console.log(response.data.data);
-  //     },
-  //     error => {
-  //       console.log(error);
-  //     }
-  //   )
-  // }
+  componentDidMount() {
+    AlternatifService.getAlternatif().then(
+      response => {
+        this.setState({
+          content:response.data.data
+        });
+        console.log(response.data.data);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
   render(){
     return(
       <div className="animated fadeIn">
@@ -50,11 +50,11 @@ export default class HasilSaw extends React.Component {
                 Alternatif
               </CCardHeader>
               <CCardBody>
-              <Link to=''>
+              <Link to='/alternatif/add'>
                 <CButton color="info" className="float-right m-2">Tambah Data</CButton>
               </Link>
               <CDataTable
-                items={alternatifData}
+                items={this.state.content}
                 fields={this.state.fields}
                 itemsPerPage={4}
                 pagination
@@ -63,8 +63,8 @@ export default class HasilSaw extends React.Component {
                     (item)=>(
                       <td>
                         <div className="row mx-md-n5">
-                          <Link to={{pathname:"/kriteria/edit",
-                        data:item.kode}}>
+                          <Link to={{pathname:"/alternatif/edit",
+                        data:item._id}}>
                             <CButton className="m-2" color="success">Edit</CButton>
                           </Link>
                           <CButton className="m-2" color="danger">Delete</CButton>

@@ -23,8 +23,8 @@ export default class SubKriteria extends React.Component {
       contentSub:[],
       kode_kriteria:"",
       fields:[
-        {key:'kode_subkriteria',label:'ID',_style: { width: '20%'}},
-        {key:'nama',label:'Nama Subkriteria'},
+        {key:'_id',label:'ID',_style: { width: '20%'}},
+        {key:'nama_subkriteria',label:'Nama Subkriteria'},
         {key:'nilai',label:'Nilai',_style: { width: '20%'}},
         {key:'status'}
       ]
@@ -48,9 +48,9 @@ export default class SubKriteria extends React.Component {
     KriteriaService.getSubkriteria(e.target.value).then(
       response => {
         this.setState({
-          contentSub:response.data
+          contentSub:response.data.data
         })
-        console.log(response.data);
+        console.log(response.data.data);
       },
       error => {
         console.log(error);
@@ -82,7 +82,7 @@ export default class SubKriteria extends React.Component {
                     <CSelect custom name ="kriteria" onChange={this.handleSelect} id="kriteria" className="w-75">
                         <option value="">Please Select</option>
                         {this.state.content.map(data => (
-                          <option key={data.kode} value={data.kode}>{data.nama}</option>
+                          <option key={data._id} value={data._id}>{data.nama_kriteria}</option>
                         ))}
                       </CSelect>
                   </div>
@@ -99,7 +99,7 @@ export default class SubKriteria extends React.Component {
                       <td>
                         <div className="row mx-md-n5">
                           <Link to={{pathname:"/kriteria/edit",
-                        data:item.kode}}>
+                        data:item._id}}>
                             <CButton className="m-2" color="success">Edit</CButton>
                           </Link>
                           <CButton className="m-2" color="danger">Delete</CButton>

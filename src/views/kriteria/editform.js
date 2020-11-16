@@ -23,7 +23,7 @@ export default class EditForm extends React.Component {
     this.onChangeAtribut = this.onChangeAtribut.bind(this);
     this.onChangeBobot = this.onChangeBobot.bind(this);
     const {data} = this.props.location
-    console.log(data);
+    // console.log(data);
     this.state = {
       nama:"",
       atribut:"",
