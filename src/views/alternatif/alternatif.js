@@ -27,6 +27,18 @@ export default class Alternatif extends React.Component {
       ]
     }
   }
+
+  removeAlternatif(nim){
+    AlternatifService.deleteAlternatif(nim).then(
+      () => {
+        window.location.reload();
+      },
+      error => {
+        console.log(error.response);
+      }
+    )
+  }
+
   componentDidMount() {
     AlternatifService.getAlternatif().then(
       response => {
@@ -67,7 +79,7 @@ export default class Alternatif extends React.Component {
                         data:item._id}}>
                             <CButton className="m-2" color="success">Edit</CButton>
                           </Link>
-                          <CButton className="m-2" color="danger">Delete</CButton>
+                          <CButton className="m-2" onClick={() => this.removeAlternatif(item._id)} color="danger">Delete</CButton>
                         </div>
                       </td>
                     )

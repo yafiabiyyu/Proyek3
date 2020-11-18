@@ -14,6 +14,23 @@ class AlternatifService {
     return axios.get(API_URL + `/proyek/alternatif/data/${nim}`,{headers:authHeader()})
   }
 
+  putAlternatif(
+    _id,
+    nama_mahasiswa,
+    alamat,
+    jenis_kelamin,
+    subkriteria_id
+  ){
+    return axios
+    .put(API_URL + `/proyek/alternatif/data/${_id}`,{
+      _id,
+      nama_mahasiswa,
+      alamat,
+      jenis_kelamin,
+      subkriteria_id
+    },{headers:authHeader()})
+  }
+
   postAlternatif(
     _id,
     nama_mahasiswa,
@@ -33,6 +50,10 @@ class AlternatifService {
       console.log(response);
       return response
     })
+  }
+
+  deleteAlternatif(_id){
+    return axios.delete(API_URL + `/proyek/alternatif/data/${_id}`,{headers:authHeader()});
   }
 }
 export default new AlternatifService();
