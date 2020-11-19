@@ -11,37 +11,36 @@ import {
 } from '@coreui/react'
 
 // import KriteriaService from '../../service/kriteria.service';
-import hasil_seleksi from '../dumy/hasil_seleksi';
+import AlternatifService from '../../service/alternatif.service';
 
 export default class HasilSeleksi extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // content:[],
+      content:[],
       fields: [
-        {key:'kode',label:'ID'},
-        {key:'nama',label:'Nama Mahasiswa'},
-        {key:'jp',label:'Jumlah Pendapatan Orang Tua'},
-        {key:'jt',label:'Jumlah Tanggungan Orang tua'},
-        {key:'st',label:'Status Orang TUa'},
-        {key:'sm',label:'Semester'},
+        {key:'_id',label:'NIM'},
+        {key:'nama_mahasiswa',label:'Nama Mahasiswa'},
+        {key:'pendapatan_ortu',label:'Jumlah Pendapatan Orang Tua'},
+        {key:'tanggungan_ortu',label:'Jumlah Tanggungan Orang tua'},
+        {key:'status_ortu',label:'Status Orang Tua'},
+        {key:'semester',label:'Semester'},
         {key:'ipk',label:'IPK'},
       ]
     }
   }
-  // componentDidMount() {
-  //   KriteriaService.getKriteriaContent().then(
-  //     response => {
-  //       this.setState({
-  //         content:response.data.data
-  //       });
-  //       console.log(response.data.data);
-  //     },
-  //     error => {
-  //       console.log(error);
-  //     }
-  //   )
-  // }
+  componentDidMount() {
+    AlternatifService.getHasilSeleksi().then(
+      response => {
+        this.setState({
+          content:response.data.data
+        });
+      },
+      error => {
+        console.log(error.response);
+      }
+    )
+  }
   render(){
     return(
       <div className="animated fadeIn">
@@ -56,7 +55,7 @@ export default class HasilSeleksi extends React.Component {
                 <CButton color="info" className="float-right m-2">Tambah Data</CButton>
               </Link> */}
               <CDataTable
-                items={hasil_seleksi}
+                items={this.state.content}
                 fields={this.state.fields}
                 itemsPerPage={4}
                 pagination
