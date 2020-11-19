@@ -45,5 +45,9 @@ class KriteriaService {
   getSubkriteria(kode) {
     return axios.get(API_URL + `/proyek/subkriteria/data/${kode}`,{headers:authHeader()});
   }
+
+  getBobot(){
+    return axios.get(API_URL + `/proyek/kriteria/data/bobot`, {headers:authHeader()});
+  }
 }
 export default new KriteriaService();
