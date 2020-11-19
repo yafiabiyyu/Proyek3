@@ -10,8 +10,8 @@ import {
   CRow
 } from '@coreui/react'
 
-// import KriteriaService from '../../service/kriteria.service';
-import bobot from '../dumy/bobot';
+import KriteriaService from '../../service/kriteria.service';
+// import bobot from '../dumy/bobot';
 
 export default class HasilSaw extends React.Component {
   constructor(props) {
@@ -19,25 +19,25 @@ export default class HasilSaw extends React.Component {
     this.state = {
       // content:[],
       fields: [
-        {key:'kode',label:'ID',_style: { width: '20%'}},
-        {key:'nama',label:'Nama Kriteria'},
-        {key:'nilai',label:'Nilai',_style: { width: '20%'}},
+        {key:'_id',label:'ID',_style: { width: '20%'}},
+        {key:'nama_kriteria',label:'Nama Kriteria'},
+        {key:'bobot',label:'Bobot',_style: { width: '20%'}},
       ]
     }
   }
-  // componentDidMount() {
-  //   KriteriaService.getKriteriaContent().then(
-  //     response => {
-  //       this.setState({
-  //         content:response.data.data
-  //       });
-  //       console.log(response.data.data);
-  //     },
-  //     error => {
-  //       console.log(error);
-  //     }
-  //   )
-  // }
+  componentDidMount() {
+    KriteriaService.getBobot().then(
+      response => {
+        this.setState({
+          content:response.data.data
+        });
+        console.log(response.data.data);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
   render(){
     return(
       <div className="animated fadeIn">
@@ -52,7 +52,7 @@ export default class HasilSaw extends React.Component {
                 <CButton color="info" className="float-right m-2">Tambah Data</CButton>
               </Link> */}
               <CDataTable
-                items={bobot}
+                items={this.state.content}
                 fields={this.state.fields}
                 itemsPerPage={4}
                 pagination
