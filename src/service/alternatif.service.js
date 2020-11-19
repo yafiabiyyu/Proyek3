@@ -55,5 +55,9 @@ class AlternatifService {
   deleteAlternatif(_id){
     return axios.delete(API_URL + `/proyek/alternatif/data/${_id}`,{headers:authHeader()});
   }
+
+  getHasilSeleksi(){
+    return axios.get(API_URL + `/proyek/alternatif/data/seleksi`,{headers:authHeader()})
+  }
 }
 export default new AlternatifService();
