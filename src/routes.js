@@ -8,7 +8,7 @@ const SubKriteria = React.lazy(() => import('./views/subkriteria/subkriteria'));
 const SubKriteriaForm = React.lazy(() => import('./views/subkriteria/subkriteriaform'));
 const editform = React.lazy(() => import('./views/kriteria/editform'));
 const SawHasil = React.lazy(() => import('./views/hasil/hasil_saw'));
-const MSawHasil = React.lazy(() => import('./views/hasil/hasil_saw'));
+const MSawHasil = React.lazy(() => import('./views/hasil/hasil_msaw'));
 const MSawProses = React.lazy(() => import('./views/proses/msaw_proses'));
 const SawProses = React.lazy(() => import('./views/proses/saw_proses'));
 const Alternatif = React.lazy(() => import('./views/alternatif/alternatif'));

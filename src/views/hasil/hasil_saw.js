@@ -11,34 +11,31 @@ import {
 } from '@coreui/react'
 
 // import KriteriaService from '../../service/kriteria.service';
-import nilai_dumy from '../dumy/nilai';
+import HasilService from '../../service/hasil.service';
+// import nilai_dumy from '../dumy/nilai';
 
 export default class HasilSaw extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // content:[],
+      content:[],
       fields: [
-        {key:'kode',label:'ID',_style: { width: '20%'}},
-        {key:'nama',label:'Nama Mahasiswa'},
+        {key:'_id',label:'ID',_style: { width: '20%'}},
+        {key:'nama_mahasiswa',label:'Nama Mahasiswa'},
         {key:'nilai',label:'Nilai',_style: { width: '20%'}},
         {key:'rank',label:'Rank'},
       ]
     }
   }
-  // componentDidMount() {
-  //   KriteriaService.getKriteriaContent().then(
-  //     response => {
-  //       this.setState({
-  //         content:response.data.data
-  //       });
-  //       console.log(response.data.data);
-  //     },
-  //     error => {
-  //       console.log(error);
-  //     }
-  //   )
-  // }
+  componentDidMount() {
+    HasilService.getHasilSaw().then(
+      response => {
+        this.setState({
+          content:response.data
+        })
+      }
+    )
+  }
   render(){
     return(
       <div className="animated fadeIn">
@@ -53,7 +50,7 @@ export default class HasilSaw extends React.Component {
                 <CButton color="info" className="float-right m-2">Tambah Data</CButton>
               </Link> */}
               <CDataTable
-                items={nilai_dumy}
+                items={this.state.content}
                 fields={this.state.fields}
                 itemsPerPage={4}
                 pagination

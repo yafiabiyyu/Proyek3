@@ -72,9 +72,9 @@ export default class SubKriteria extends React.Component {
                 Data Kriteria
               </CCardHeader>
               <CCardBody>
-              <Link to='/kriteria/subkriteria/add'>
+              {/* <Link to='/kriteria/subkriteria/add'>
                 <CButton color="info" className="float-right m-2">Tambah Data</CButton>
-              </Link>
+              </Link> */}
               <div className="container">
                 <div className="row justify-content-md-center">
                   <div className="col-md-6">

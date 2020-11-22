@@ -1,7 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import {
-  CButton,
   CCard,
   CCardBody,
   CCardHeader,
@@ -22,7 +20,6 @@ export default class Kriteria extends React.Component {
         {key:'nama_kriteria',label:'Nama Kriteria'},
         {key:'atribut',label:'Atribut',_style: { width: '20%'}},
         {key:'bobot',label:'Bobot'},
-        {key:'status'}
       ]
     }
   }
@@ -49,28 +46,25 @@ export default class Kriteria extends React.Component {
                 Data Kriteria
               </CCardHeader>
               <CCardBody>
-              <Link to='/kriteria/add'>
-                <CButton color="info" className="float-right m-2">Tambah Data</CButton>
-              </Link>
               <CDataTable
                 items={this.state.content}
                 fields={this.state.fields}
                 itemsPerPage={4}
                 pagination
-                scopedSlots = {{
-                  'status':
-                    (item)=>(
-                      <td>
-                        <div className="row mx-md-n5">
-                          <Link to={{pathname:"/kriteria/edit",
-                        data:item._id}}>
-                            <CButton className="m-2" color="success">Edit</CButton>
-                          </Link>
-                          <CButton className="m-2" color="danger">Delete</CButton>
-                        </div>
-                      </td>
-                    )
-                }}
+                // scopedSlots = {{
+                //   'status':
+                //     (item)=>(
+                //       <td>
+                //         <div className="row mx-md-n5">
+                //           <Link to={{pathname:"/kriteria/edit",
+                //         data:item._id}}>
+                //             <CButton className="m-2" color="success">Edit</CButton>
+                //           </Link>
+                //           <CButton className="m-2" color="danger">Delete</CButton>
+                //         </div>
+                //       </td>
+                //     )
+                // }}
               />
               </CCardBody>
             </CCard>

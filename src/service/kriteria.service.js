@@ -24,6 +24,23 @@ class KriteriaService {
     })
   }
 
+  postSubkriteria(
+    kode_kriteria,
+    nama_subkriteria,
+    nilai
+  ){
+    return axios
+    .post(API_URL + `/proyek/subkriteria/data`,{
+      kode_kriteria,
+      nama_subkriteria,
+      nilai
+    },{headers:authHeader()})
+    .then(response => {
+      console.log(response);
+      return response
+    })
+  }
+
   getKriteriaSpesifik(kode) {
     return axios.get(API_URL + `/proyek/kriteria/data/${kode}`,{headers:authHeader()});
   }

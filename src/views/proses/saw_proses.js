@@ -14,14 +14,16 @@ import {
 } from '@coreui/react'
 
 // import KriteriaService from '../../service/kriteria.service';
-import konversi_saw from '../dumy/konversi_saw';
-import normalisasi_saw from '../dumy/normalisasi_saw';
+// import konversi_saw from '../dumy/konversi_saw';
+// import normalisasi_saw from '../dumy/normalisasi_saw';
+import HasilService from '../../service/hasil.service';
 
 export default class ProsesSaw extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // content:[],
+      content_konversi:[],
+      content_normalisasi:[],
       // fields: [
       //   {key:'kode',label:'ID',_style: { width: '20%'}},
       //   {key:'nama',label:'Nama Mahasiswa'},
@@ -29,29 +31,34 @@ export default class ProsesSaw extends React.Component {
       //   {key:'rank',label:'Rank'},
       // ]
       fields: [
-        {key:'kode', label:'ID'},
-        {key:'nama',label:'Nama'},
-        {key:'K01',lable:'K01'},
-        {key:'K02',lable:'K02'},
-        {key:'K03',lable:'K03'},
-        {key:'K04',lable:'K04'},
-        {key:'K05',lable:'K05'},
+        {key:'_id', label:'ID'},
+        {key:'nama_mahasiswa',label:'Nama'},
+        {key:'k1',lable:'K1'},
+        {key:'k2',lable:'K2'},
+        {key:'k3',lable:'K3'},
+        {key:'k4',lable:'K4'},
+        {key:'k5',lable:'K5'},
       ]
     }
   }
-  // componentDidMount() {
-  //   KriteriaService.getKriteriaContent().then(
-  //     response => {
-  //       this.setState({
-  //         content:response.data.data
-  //       });
-  //       console.log(response.data.data);
-  //     },
-  //     error => {
-  //       console.log(error);
-  //     }
-  //   )
-  // }
+
+  componentDidMount() {
+    HasilService.getKonversi().then(
+      response => {
+        this.setState({
+          content_konversi:response.data
+        })
+      }
+    )
+    HasilService.getNormalisasi().then(
+      response => {
+        this.setState({
+          content_normalisasi:response.data
+        })
+      }
+    );
+  }
+
   render(){
     return(
       <div className="animated fadeIn">
@@ -59,7 +66,7 @@ export default class ProsesSaw extends React.Component {
           <CCol>
             <CCard>
               <CCardHeader>
-                Proses SAW
+                Proses M-SAW
               </CCardHeader>
               <CCardBody>
                 <CTabs>
@@ -78,29 +85,15 @@ export default class ProsesSaw extends React.Component {
                   <CTabContent>
                     <CTabPane>
                       <CDataTable
-                        items={konversi_saw}
+                        items={this.state.content_konversi}
                         fields={this.state.fields}
                         itemsPerPage={4}
                         pagination
-                        scopedSlots = {{
-                          'status':
-                            (item)=>(
-                              <td>
-                                <div className="row mx-md-n5">
-                                  <Link to={{pathname:"/kriteria/edit",
-                                data:item.kode}}>
-                                    <CButton className="m-2" color="success">Edit</CButton>
-                                  </Link>
-                                  <CButton className="m-2" color="danger">Delete</CButton>
-                                </div>
-                              </td>
-                            )
-                        }}
                       />
                     </CTabPane>
                     <CTabPane>
                       <CDataTable
-                        items={normalisasi_saw}
+                        items={this.state.content_normalisasi}
                         fields={this.state.fields}
                         itemsPerPage={4}
                         pagination

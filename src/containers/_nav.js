@@ -66,7 +66,7 @@ export default [
       {
         _tag: 'CSidebarNavItem',
         name: 'Proses SAW',
-        to: '/proses/msaw',
+        to: '/proses/saw',
       },
       {
         _tag: 'CSidebarNavItem',
